@@ -1,0 +1,110 @@
+q_states:
+  q_list:
+    - q0
+    - q1
+    - q2
+    - q_fin
+  initial: q0
+  final: q_fin
+
+alphabet:
+  - "0"
+  - "1"
+
+tape_alphabet:
+  - "0"
+  - "1"
+  - B
+
+delta:
+  # Ir al final
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: "0"
+    output:
+      final_state: q0
+      mem_cache_value: null
+      tape_output: "0"
+      tape_displacement: R
+
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: "1"
+    output:
+      final_state: q0
+      mem_cache_value: null
+      tape_output: "1"
+      tape_displacement: R
+
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: B
+    output:
+      final_state: q1
+      mem_cache_value: null
+      tape_output: B
+      tape_displacement: L
+
+  # Incremento
+  - params:
+      initial_state: q1
+      mem_cache_value: null
+      tape_input: "0"
+    output:
+      final_state: q_fin
+      mem_cache_value: null
+      tape_output: "1"
+      tape_displacement: S
+
+  - params:
+      initial_state: q1
+      mem_cache_value: null
+      tape_input: "1"
+    output:
+      final_state: q2
+      mem_cache_value: "1"
+      tape_output: "0"
+      tape_displacement: L
+
+  # Propagación de carry
+  - params:
+      initial_state: q2
+      mem_cache_value: "1"
+      tape_input: "0"
+    output:
+      final_state: q_fin
+      mem_cache_value: null
+      tape_output: "1"
+      tape_displacement: S
+
+  - params:
+      initial_state: q2
+      mem_cache_value: "1"
+      tape_input: "1"
+    output:
+      final_state: q2
+      mem_cache_value: "1"
+      tape_output: "0"
+      tape_displacement: L
+
+  - params:
+      initial_state: q2
+      mem_cache_value: "1"
+      tape_input: B
+    output:
+      final_state: q_fin
+      mem_cache_value: null
+      tape_output: "1"
+      tape_displacement: S
+
+simulation_strings:
+  - "0"
+  - "1"
+  - "10"
+  - "101"
+  - "111"
+  - "1001"
+  - "1111"

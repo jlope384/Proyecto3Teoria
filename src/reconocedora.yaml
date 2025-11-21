@@ -1,0 +1,228 @@
+  q_states:
+  q_list:
+    - q0
+    - q1
+    - q2
+    - q3
+    - q4
+    - q_trap
+  initial: q0
+  final: q4
+
+alphabet:
+  - a
+  - b
+  - c
+
+tape_alphabet:
+  - a
+  - b
+  - c
+  - X
+  - Y
+  - Z
+  - B
+
+delta:
+  # Encontrar a
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: a
+    output:
+      final_state: q1
+      mem_cache_value: null
+      tape_output: X
+      tape_displacement: R
+
+  # Buscar b
+  - params:
+      initial_state: q1
+      mem_cache_value: null
+      tape_input: a
+    output:
+      final_state: q1
+      mem_cache_value: null
+      tape_output: a
+      tape_displacement: R
+
+  - params:
+      initial_state: q1
+      mem_cache_value: null
+      tape_input: Y
+    output:
+      final_state: q1
+      mem_cache_value: null
+      tape_output: Y
+      tape_displacement: R
+
+  - params:
+      initial_state: q1
+      mem_cache_value: null
+      tape_input: b
+    output:
+      final_state: q2
+      mem_cache_value: null
+      tape_output: Y
+      tape_displacement: R
+
+  # Buscar c
+  - params:
+      initial_state: q2
+      mem_cache_value: null
+      tape_input: b
+    output:
+      final_state: q2
+      mem_cache_value: null
+      tape_output: b
+      tape_displacement: R
+
+  - params:
+      initial_state: q2
+      mem_cache_value: null
+      tape_input: Z
+    output:
+      final_state: q2
+      mem_cache_value: null
+      tape_output: Z
+      tape_displacement: R
+
+  - params:
+      initial_state: q2
+      mem_cache_value: null
+      tape_input: c
+    output:
+      final_state: q3
+      mem_cache_value: null
+      tape_output: Z
+      tape_displacement: L
+
+  # Regresar
+  - params:
+      initial_state: q3
+      mem_cache_value: null
+      tape_input: a
+    output:
+      final_state: q3
+      mem_cache_value: null
+      tape_output: a
+      tape_displacement: L
+
+  - params:
+      initial_state: q3
+      mem_cache_value: null
+      tape_input: b
+    output:
+      final_state: q3
+      mem_cache_value: null
+      tape_output: b
+      tape_displacement: L
+
+  - params:
+      initial_state: q3
+      mem_cache_value: null
+      tape_input: Y
+    output:
+      final_state: q3
+      mem_cache_value: null
+      tape_output: Y
+      tape_displacement: L
+
+  - params:
+      initial_state: q3
+      mem_cache_value: null
+      tape_input: Z
+    output:
+      final_state: q3
+      mem_cache_value: null
+      tape_output: Z
+      tape_displacement: L
+
+  - params:
+      initial_state: q3
+      mem_cache_value: null
+      tape_input: X
+    output:
+      final_state: q0
+      mem_cache_value: null
+      tape_output: X
+      tape_displacement: R
+
+  # Fin
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: Y
+    output:
+      final_state: q4
+      mem_cache_value: null
+      tape_output: Y
+      tape_displacement: R
+
+  # Verificación
+  - params:
+      initial_state: q4
+      mem_cache_value: null
+      tape_input: Y
+    output:
+      final_state: q4
+      mem_cache_value: null
+      tape_output: Y
+      tape_displacement: R
+
+  - params:
+      initial_state: q4
+      mem_cache_value: null
+      tape_input: Z
+    output:
+      final_state: q4
+      mem_cache_value: null
+      tape_output: Z
+      tape_displacement: R
+
+  - params:
+      initial_state: q4
+      mem_cache_value: null
+      tape_input: B
+    output:
+      final_state: q4
+      mem_cache_value: null
+      tape_output: B
+      tape_displacement: S
+
+  # Trampa
+  - params:
+      initial_state: q4
+      mem_cache_value: null
+      tape_input: a
+    output:
+      final_state: q_trap
+      mem_cache_value: null
+      tape_output: a
+      tape_displacement: S
+
+  - params:
+      initial_state: q4
+      mem_cache_value: null
+      tape_input: b
+    output:
+      final_state: q_trap
+      mem_cache_value: null
+      tape_output: b
+      tape_displacement: S
+
+  - params:
+      initial_state: q4
+      mem_cache_value: null
+      tape_input: c
+    output:
+      final_state: q_trap
+      mem_cache_value: null
+      tape_output: c
+      tape_displacement: S
+
+simulation_strings:
+  - "aabbcc"
+  - "aaabbbccc"
+  - "aaabbcc"
+  - "aabbbcc"

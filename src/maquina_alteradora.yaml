@@ -1,0 +1,52 @@
+q_states:
+  q_list:
+    - q0
+    - q_fin
+  initial: q0
+  final: q_fin
+
+alphabet:
+  - a
+  - b
+
+tape_alphabet:
+  - a
+  - b
+  - B
+
+delta:
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: a
+    output:
+      final_state: q0
+      mem_cache_value: null
+      tape_output: b
+      tape_displacement: R
+
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: b
+    output:
+      final_state: q0
+      mem_cache_value: null
+      tape_output: a
+      tape_displacement: R
+
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: B
+    output:
+      final_state: q_fin
+      mem_cache_value: null
+      tape_output: B
+      tape_displacement: S
+
+simulation_strings:
+  - "abbab"
+  - "babaa"
+  - "aaaaa"
+  - "bbabb"
