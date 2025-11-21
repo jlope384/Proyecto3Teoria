@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches y archivos temporales
+.Python
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+
+# Distribuciones y artefactos de build
+build/
+dist/
+*.egg-info/
+
+# Configuración local
+.env
+.env.*
+.DS_Store
+Thumbs.db
