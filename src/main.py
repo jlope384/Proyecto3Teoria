@@ -19,20 +19,27 @@ def discover_configs() -> dict[str, Path]:
     return configs
 
 
-def prompt_selection(configs: dict[str, Path]) -> Path:
-    """Render a small menu so the user can choose a config interactively."""
+def prompt_selection(configs: dict[str, Path]) -> Path | None:
+    """Render a menu so the user can choose a config or exit."""
     options = sorted(configs.items())
-    print("Selecciona una configuración disponible:\n")
-    for idx, (key, path) in enumerate(options, start=1):
-        print(f"  {idx}. {key} -> {path.name}")
 
     while True:
+        print("\nSelecciona una configuración disponible:\n")
+        for idx, (key, path) in enumerate(options, start=1):
+            print(f"  {idx}. {key} -> {path.name}")
+        exit_option = len(options) + 1
+        print(f"  {exit_option}. salir")
+
         choice = input("\nIngresa el número o nombre: ").strip().lower()
         if choice.isdigit():
             idx = int(choice) - 1
             if 0 <= idx < len(options):
                 return options[idx][1]
+            if idx == exit_option - 1:
+                return None
         else:
+            if choice in {"salir", "exit", "q"}:
+                return None
             selected = configs.get(choice)
             if selected:
                 return selected
@@ -61,7 +68,20 @@ def main():
         print("No se encontraron archivos .yaml en el directorio actual ni en 'src/'.")
         sys.exit(1)
 
-    config_path = resolve_config_path(configs)
+    if len(sys.argv) >= 2:
+        config_path = resolve_config_path(configs)
+        run_simulation(config_path)
+        return
+
+    while True:
+        config_path = prompt_selection(configs)
+        if config_path is None:
+            print("\nSaliendo del simulador.")
+            break
+        run_simulation(config_path)
+
+
+def run_simulation(config_path: Path) -> None:
     print(f"\nCargando configuración desde: '{config_path}'")
 
     with open(config_path, "r", encoding="utf-8") as config_file:
@@ -79,5 +99,4 @@ def main():
     print("\n--- Simulaciones completadas ---")
 
 
-if __name__ == "__main__":
-    main()
+main()
