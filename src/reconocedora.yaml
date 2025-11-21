@@ -1,4 +1,4 @@
-  q_states:
+q_states:
   q_list:
     - q0
     - q1
@@ -24,7 +24,8 @@ tape_alphabet:
   - B
 
 delta:
-  # Encontrar a
+
+  # --- MARCAR 'a' ---
   - params:
       initial_state: q0
       mem_cache_value: null
@@ -35,7 +36,29 @@ delta:
       tape_output: X
       tape_displacement: R
 
-  # Buscar b
+  # Si en q0 aparece b o c → desorden → trampa
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: b
+    output:
+      final_state: q_trap
+      mem_cache_value: null
+      tape_output: b
+      tape_displacement: S
+
+  - params:
+      initial_state: q0
+      mem_cache_value: null
+      tape_input: c
+    output:
+      final_state: q_trap
+      mem_cache_value: null
+      tape_output: c
+      tape_displacement: S
+
+
+  # --- BUSCAR 'b' ---
   - params:
       initial_state: q1
       mem_cache_value: null
@@ -66,7 +89,8 @@ delta:
       tape_output: Y
       tape_displacement: R
 
-  # Buscar c
+
+  # --- BUSCAR 'c' ---
   - params:
       initial_state: q2
       mem_cache_value: null
@@ -97,7 +121,8 @@ delta:
       tape_output: Z
       tape_displacement: L
 
-  # Regresar
+
+  # --- REGRESAR AL INICIO ---
   - params:
       initial_state: q3
       mem_cache_value: null
@@ -148,7 +173,8 @@ delta:
       tape_output: X
       tape_displacement: R
 
-  # Fin
+
+  # --- SI YA SOLO HAY MARCAS, ACEPTAR ---
   - params:
       initial_state: q0
       mem_cache_value: null
@@ -159,7 +185,8 @@ delta:
       tape_output: Y
       tape_displacement: R
 
-  # Verificación
+
+  # --- EN q4 SOLO SE PERMITEN MARCAS O BLANCO ---
   - params:
       initial_state: q4
       mem_cache_value: null
@@ -190,7 +217,8 @@ delta:
       tape_output: B
       tape_displacement: S
 
-  # Trampa
+
+  # --- TRAMPA ---
   - params:
       initial_state: q4
       mem_cache_value: null
