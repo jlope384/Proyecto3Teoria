@@ -28,7 +28,7 @@ def prompt_selection(configs: dict[str, Path]) -> Path | None:
         for idx, (key, path) in enumerate(options, start=1):
             print(f"  {idx}. {key} -> {path.name}")
         exit_option = len(options) + 1
-        print(f"  {exit_option}. salir")
+        print(f"  {exit_option}. Salir")
 
         choice = input("\nIngresa el número o nombre: ").strip().lower()
         if choice.isdigit():
